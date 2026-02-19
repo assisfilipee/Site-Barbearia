@@ -1,0 +1,2894 @@
+/* ==================================================
+  PÁGINA: LANDING - BARBEARIA (Filipe Assis Barber)
+  ARQUIVO: css/styles.css
+  VERSÃO: 1.0 (Desktop-first | sem responsividade por enquanto)
+  OBJETIVO: Visual MEGA PREMIUM + foco em conversão
+  OBS: Navbar topo transparente; no scroll adiciona .is-scrolled (JS depois)
+================================================== */
+
+/* =========================
+   RESET + BASE
+========================= */
+*,
+*::before,
+*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background:#07080b;
+  color: rgba(255,255,255,.88);
+  line-height:1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+
+:root{
+  --container: 1160px;
+
+  --bg-main: #07080b;
+  --bg-soft: #0b0d12;
+  --bg-card: rgba(255,255,255,.06);
+  --bg-card-2: rgba(255,255,255,.085);
+
+  --text: rgba(255,255,255,.90);
+  --muted: rgba(255,255,255,.70);
+  --muted-2: rgba(255,255,255,.55);
+
+  --border: rgba(255,255,255,.10);
+  --border-2: rgba(255,255,255,.14);
+
+  --radius-sm: 14px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  --shadow: 0 18px 60px rgba(0,0,0,.55);
+  --shadow-soft: 0 14px 44px rgba(0,0,0,.42);
+
+  --gold: #d7b26a;
+  --gold-2: #b9924f;
+  --green: #47c100;
+
+  --header-h: 86px;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+.container{
+  width:min(var(--container), 92vw);
+  margin:0 auto;
+}
+
+.section{
+  padding: 34px 0;
+  position:relative;
+}
+
+.section__head{
+  max-width: 740px;
+  margin:0 0 38px;
+}
+
+.section__kicker{
+  margin:0 0 10px;
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+
+  font-size:.82rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.68);
+}
+
+.section__title{
+  margin:0 0 12px;
+  font-size: clamp(2.05rem, 2.2vw, 2.65rem);
+  line-height:1.15;
+  letter-spacing:-0.02em;
+  color: var(--text);
+}
+
+.section__subtitle{
+  margin:0;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.card{
+  background: linear-gradient(180deg, var(--bg-card), rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding: 14px 18px;
+  min-height: 48px;
+
+  border-radius: 999px;
+  border:1px solid transparent;
+
+  font-weight: 650;
+  letter-spacing:.01em;
+
+  transition: transform .18s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease, opacity .22s ease;
+  will-change: transform;
+  cursor:pointer;
+}
+
+.btn--primary{
+  background: radial-gradient(120% 120% at 10% 10%, rgba(215,178,106,.35) 0%, rgba(215,178,106,.12) 38%, rgba(215,178,106,.08) 70%) ,
+              linear-gradient(180deg, rgba(215,178,106,.95), rgba(185,146,79,.92));
+  color: #16110a;
+  box-shadow: 0 18px 50px rgba(215,178,106,.20);
+}
+
+.btn--primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 64px rgba(215,178,106,.28);
+}
+
+.btn--ghost{
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.88);
+}
+
+.btn--ghost:hover{
+  transform: translateY(-2px);
+  border-color: rgba(215,178,106,.45);
+  background: rgba(255,255,255,.06);
+}
+
+/* Acessibilidade: foco premium */
+:focus-visible{
+  outline: 2px solid rgba(215,178,106,.7);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Skip link */
+.skip-link{
+  position:absolute;
+  left:-999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left: 16px;
+  top: 14px;
+  width:auto;
+  height:auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.72);
+  border: 1px solid rgba(215,178,106,.35);
+  z-index: 999999;
+}
+
+/* =========================
+   HEADER / NAV (logo central) — AJUSTADO
+   - logo SEM botão (sem borda/fundo/padding)
+   - nav centralizada de verdade
+========================= */
+.header{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  height: var(--header-h);
+  z-index: 9999;
+
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition: background .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.header.is-scrolled{
+  background: rgba(9, 10, 14, .42);
+  border-bottom-color: rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header__inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center; /* ✅ centraliza a barra inteira */
+}
+
+/* lista centralizada */
+.nav{ width:100%; }
+
+.nav__list{
+  list-style:none;
+  padding:0;
+  margin:0 auto;          /* ✅ centraliza */
+  width: min(980px, 92vw);/* ✅ evita puxar pros lados */
+  display:grid;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr;
+  align-items:center;
+  gap: 2px;
+}
+
+.nav__item{
+  display:flex;
+  justify-content:center;
+}
+
+/* links */
+.nav__link{
+  position:relative;
+  padding: 10px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,.82);
+  font-weight: 620;
+  font-size: .98rem;
+  letter-spacing:.01em;
+
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.nav__link:hover{
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  transform: translateY(-1px);
+}
+
+.nav__link::after{
+  content:"";
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 1px;
+  opacity:0;
+  background: linear-gradient(90deg, transparent, rgba(215,178,106,.75), transparent);
+  transition: opacity .22s ease;
+}
+.nav__link:hover::after{ opacity:1; }
+
+/* Brand central */
+.nav__item--brand{ justify-content:center; }
+
+/* ✅ SEM botão: sem borda/fundo/padding */
+.brand{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:0;
+  background: transparent;
+  border-radius:0;
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.brand:hover{
+  transform: translateY(-1px);
+  opacity: .96;
+}
+
+/* ✅ se você ainda estiver com texto (opcional) */
+.brand__name{
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: .86rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(215,178,106,.80));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ✅ logo imagem (se estiver usando <img class="brand__logo">) */
+.brand__logo{
+  height: 124px;
+  width: auto;
+  display:block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.45));
+  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+}
+
+.brand:hover .brand__logo{
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));
+}
+
+/* =========================
+   HERO FULLSCREEN
+========================= */
+.hero--fullscreen{
+  position:relative;
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:0;
+}
+
+/* imagem ocupa tudo */
+.hero__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.hero__bgImg{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+}
+
+/* overlay escuro 50% */
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.5);
+  z-index:1;
+}
+
+/* conteúdo centralizado */
+.hero__content--center{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width: 780px;
+  padding-top: var(--header-h); /* garante que não fique atrás da navbar */
+}
+
+/* headline */
+.hero__headline{
+  margin:0 0 26px;
+  font-size: clamp(2.6rem, 3.5vw, 3.6rem);
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero__headlineSub{
+  display:block;
+  margin-top: 10px;
+  color: rgba(215,178,106,.95);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+}
+
+/* botão hero */
+.btn--hero{
+  padding: 16px 28px;
+  font-size: 1.05rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+}
+
+/* =========================
+   SOBRE
+========================= */
+.section--about{
+  background: linear-gradient(180deg, rgba(11,13,18,1) 0%, rgba(7,8,11,1) 100%);
+}
+
+.about{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 34px;
+  align-items:start;
+}
+
+.about__text p{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.78);
+}
+
+.about__highlights{
+  list-style:none;
+  padding:0;
+  margin: 18px 0 0;
+  display:grid;
+  gap: 10px;
+}
+
+.about__highlight{
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.80);
+}
+
+.about__cta{ margin-top: 18px; }
+
+.about__media{
+  position:relative;
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.about__img{
+  width:100%;
+  height:auto;
+  display:block;
+  transform: scale(1.02);
+}
+
+.about__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(520px 420px at 80% 15%, rgba(215,178,106,.14), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.36) 80%);
+}
+
+.about__badge{
+  position:absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index:2;
+
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  background: rgba(0,0,0,.46);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.about__badgeTitle{
+  margin:0 0 2px;
+  font-weight: 850;
+  color: rgba(255,255,255,.92);
+}
+.about__badgeText{
+  margin:0;
+  color: rgba(255,255,255,.66);
+  font-size:.92rem;
+}
+
+/* =========================
+   SERVIÇOS
+========================= */
+.section--services{
+  background: linear-gradient(180deg, rgba(7,8,11,1) 0%, rgba(11,13,18,1) 100%);
+}
+
+.services{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.service{
+  padding: 22px 22px 20px;
+  position:relative;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.service:hover{
+  transform: translateY(-4px);
+  border-color: rgba(215,178,106,.25);
+  background: linear-gradient(180deg, var(--bg-card-2), rgba(255,255,255,.03));
+}
+
+.service__tag{
+  position:absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 10px;
+  border-radius: 999px;
+
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight: 850;
+
+  background: rgba(215,178,106,.18);
+  border: 1px solid rgba(215,178,106,.28);
+  color: rgba(215,178,106,.95);
+}
+
+.service__title{
+  margin:0 0 10px;
+  font-size: 1.28rem;
+  letter-spacing:-0.01em;
+  color: rgba(255,255,255,.92);
+}
+
+.service__desc{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.72);
+}
+
+.service__bullets{
+  margin:0 0 16px;
+  padding-left: 18px;
+  color: rgba(255,255,255,.70);
+}
+
+.service__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight: 800;
+  color: rgba(215,178,106,.92);
+  letter-spacing:.01em;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.service__cta:hover{
+  transform: translateX(3px);
+  opacity:.95;
+}
+
+.service--featured{
+  border-color: rgba(215,178,106,.22);
+  background: linear-gradient(180deg, rgba(215,178,106,.10), rgba(255,255,255,.03));
+}
+
+/* Nota + CTA */
+.services__note{
+  margin-top: 18px;
+  padding: 18px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+.services__noteText{
+  margin:0;
+  color: rgba(255,255,255,.72);
+}
+
+/* =========================
+   PLANOS / CLUBE
+========================= */
+.section--plans{
+  background: linear-gradient(180deg, rgba(7,8,11,1) 0%, rgba(11,13,18,1) 100%);
+}
+
+.section__head--center{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.plans{
+  margin-top: 28px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items:stretch;
+}
+
+/* card */
+.plan{
+  position:relative;
+  padding: 28px 20px 26px;
+  border-radius: 26px;
+
+  border: 2px solid rgba(215,178,106,.6);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(215,178,106,.06) 0%, rgba(0,0,0,.55) 60%);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+
+  text-align:center;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.plan:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 28px 80px rgba(0,0,0,.65);
+  border-color: rgba(215,178,106,.9);
+}
+
+/* badge topo */
+.plan__badge{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform: translateX(-50%);
+
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.08em;
+
+  background: linear-gradient(180deg, #d7b26a, #b9924f);
+  color:#1a1408;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+/* título */
+.plan__title{
+  margin: 20px 0 10px;
+  font-size: 1.9rem;
+  letter-spacing:.03em;
+  color:#fff;
+}
+
+.plan__title span{
+  display:block;
+  color: var(--gold);
+  font-weight:800;
+}
+
+/* preço */
+.plan__price{
+  margin: 10px 0 0;
+  font-size: 3.2rem;
+  font-weight:800;
+  color:#fff;
+}
+
+.plan__currency{
+  font-size: 1.2rem;
+  margin-right: 4px;
+  color: var(--gold);
+}
+
+.plan__cents{
+  font-size: 1.2rem;
+  color: rgba(255,255,255,.7);
+}
+
+/* destaque */
+.plan--featured{
+  border-color: var(--gold);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(215,178,106,.14) 0%, rgba(0,0,0,.55) 60%);
+}
+
+/* botão */
+.plans__cta{
+  margin-top: 32px;
+  text-align:center;
+}
+
+/* =========================
+   CURSOS
+========================= */
+.section--courses{
+  position:relative;
+  min-height: 92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:0;
+}
+
+/* background */
+.courses__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.courses__bgImg{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position:center;
+}
+
+/* overlay escuro + dourado */
+.courses__overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 80% 50%, rgba(215,178,106,.18), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.85));
+  z-index:1;
+}
+
+/* conteúdo */
+.courses__content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width: 720px;
+}
+
+/* kicker */
+.courses__kicker{
+  margin:0;
+  font-size:1.2rem;
+  letter-spacing:.18em;
+  color:#fff;
+}
+
+.courses__kickerSub{
+  margin:0 0 18px;
+  letter-spacing:.22em;
+  color: var(--gold);
+  font-weight:600;
+}
+
+/* título */
+.courses__title{
+  margin:0 0 14px;
+  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+  line-height:1.15;
+  color:#fff;
+  font-weight:800;
+}
+
+/* texto */
+.courses__desc{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.78);
+}
+
+.courses__highlight{
+  margin:0 0 20px;
+  color: var(--gold);
+  font-weight:600;
+  letter-spacing:.05em;
+}
+
+/* botão */
+.btn--courses{
+  margin-bottom: 28px;
+  padding: 16px 26px;
+}
+
+/* features */
+.courses__features{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 34px;
+}
+
+.courses__feature{
+  display:flex;
+  flex-direction:column;   /* empilha ícone + texto */
+  align-items:center;      /* centraliza horizontal */
+  justify-content:center;  /* centraliza vertical */
+  text-align:center;
+  color: rgba(255,255,255,.85);
+  font-size:.92rem;
+  min-width: 140px;        /* deixa todos alinhados */
+}
+
+.courses__feature p{
+  margin-top: 8px;
+  line-height:1.3;
+}
+
+.courses__icon{
+  display:block;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  color: var(--gold);
+}
+
+/* ícones em imagem */
+.courses__iconImg{
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.courses__feature:hover .courses__iconImg{
+  transform: translateY(-2px) scale(1.05);
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+}
+
+/* =========================
+   CONTATO
+========================= */
+.section--contact{
+  background: linear-gradient(180deg, rgba(11,13,18,1) 0%, rgba(7,8,11,1) 100%);
+}
+
+.contact{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* CARD ESQUERDA */
+.contact__card{
+  padding: 22px;
+}
+
+.contact__title{
+  margin:0 0 14px;
+  font-size: 1.24rem;
+  color: rgba(255,255,255,.92);
+}
+
+.contact__list{
+  list-style:none;
+  padding:0;
+  margin:0 0 18px;
+  display:grid;
+  gap: 12px;
+}
+
+.contact__item{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap: 14px;
+
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+.contact__label{
+  color: rgba(255,255,255,.60);
+  font-size:.92rem;
+  font-weight: 700;
+}
+
+.contact__value{
+  color: rgba(255,255,255,.86);
+  font-weight: 750;
+  transition: color .18s ease, opacity .18s ease;
+}
+
+.contact__value:hover{
+  color: rgba(215,178,106,.92);
+  opacity: .95;
+}
+
+.contact__actions{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  margin: 0 0 12px;
+}
+
+.contact__trust{
+  margin:0;
+  color: rgba(255,255,255,.62);
+  font-size:.95rem;
+}
+
+/* CARD DIREITA — MAPA */
+.contact__map{
+  padding: 22px;
+  display:flex;
+  flex-direction:column;
+}
+
+.contact__mapWrapper{
+  margin-top: 12px;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+
+  flex: 1;
+  min-height: 360px;
+
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
+}
+
+.contact__mapWrapper iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+/* =========================
+   FOOTER MINIMAL
+========================= */
+.footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #07090f;
+}
+
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 18px 0;
+  gap: 12px;
+}
+
+.footer__copy{
+  margin:0;
+  font-size:.92rem;
+  color: rgba(255,255,255,.55);
+}
+
+.footer__dev{
+  margin:0;
+  font-size:.92rem;
+  color: rgba(255,255,255,.55);
+}
+
+.footer__dev a{
+  color: rgba(215,178,106,.92);
+  font-weight:600;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.footer__dev a:hover{
+  opacity:.9;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   WHATS FLOAT (conversão) — PREMIUM (SEM CÍRCULO VERDE)
+   - Apenas a logo (maior)
+   - Sobe um pouco
+   - Tooltip "Agendar no Whats" no hover (cores do site)
+========================= */
+.whats-float{
+  position: fixed;
+  right: 22px;
+  bottom: 74px;              /* ✅ sobe um pouco (antes 22px) */
+  z-index: 999999;
+
+  width: 64px;
+  height: 64px;
+
+  display:grid;
+  place-items:center;
+
+  /* ✅ sem círculo atrás */
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  transition: transform .18s ease, filter .22s ease, opacity .22s ease;
+  cursor:pointer;
+
+  /* para o tooltip */
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ✅ remove pulse antigo (não faz mais sentido sem círculo) */
+.whats-float::before{ content:none; }
+
+/* hover suave */
+.whats-float:hover{
+  transform: translateY(-2px);
+}
+
+/* ✅ logo maior (tamanho do círculo antigo) */
+.whats-float__img{
+  width: 54px;              /* ✅ antes 28px */
+  height: 54px;
+  object-fit: contain;
+  display:block;
+  pointer-events:none;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.55));
+  transition: transform .18s ease, filter .22s ease, opacity .22s ease;
+}
+
+.whats-float:hover .whats-float__img{
+  transform: scale(1.06);
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.62));
+  opacity: .98;
+}
+
+/* =========================
+   TOOLTIP (hover) — "Agendar no Whats"
+   - padrão de cor do site (dark + dourado)
+========================= */
+.whats-float::after{
+  content:"Agendar no Whats";
+  position:absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  background: rgba(10,12,18,.72);
+  border: 1px solid rgba(215,178,106,.28);
+  color: rgba(255,255,255,.88);
+
+  font-weight: 750;
+  font-size: .92rem;
+  letter-spacing: .01em;
+  white-space: nowrap;
+
+  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+/* setinha do tooltip */
+.whats-float::marker{ content:""; } /* noop (garante nada estranho) */
+
+.whats-float::before{
+  /* setinha (triângulo) */
+  content:"";
+  position:absolute;
+  right: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid rgba(10,12,18,.72);
+
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events:none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+/* mostra tooltip no hover/focus */
+.whats-float:hover::after,
+.whats-float:focus-visible::after{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.whats-float:hover::before,
+.whats-float:focus-visible::before{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+/* =========================
+   ÂNCORAS (header fixo)
+========================= */
+section[id]{ scroll-margin-top: calc(var(--header-h) - 6px); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================================================
+  PÁGINA: LANDING - BARBEARIA (Filipe Assis Barber)
+  ARQUIVO: css/styles.css
+  OBJETIVO: Responsividade (sem alterar desktop)
+  REGRAS:
+  - Desktop (>= 992px) permanece como está (não mexer fora de media queries)
+  - Ajustes apenas via CSS responsivo
+  - Sem scroll horizontal
+  - Margens laterais melhores no mobile
+================================================== */
+
+
+/* =========================
+   RESET + BASE (mantido)
+========================= */
+*,
+*::before,
+*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  background:#07080b;
+  color: rgba(255,255,255,.88);
+  line-height:1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ✅ evita estourar largura em mobile (sem mexer no layout desktop) */
+body{ overflow-x:hidden; }
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+
+
+/* =========================
+   VARIABLES (mantido)
+========================= */
+:root{
+  --container: 1160px;
+
+  --bg-main: #07080b;
+  --bg-soft: #0b0d12;
+  --bg-card: rgba(255,255,255,.06);
+  --bg-card-2: rgba(255,255,255,.085);
+
+  --text: rgba(255,255,255,.90);
+  --muted: rgba(255,255,255,.70);
+  --muted-2: rgba(255,255,255,.55);
+
+  --border: rgba(255,255,255,.10);
+  --border-2: rgba(255,255,255,.14);
+
+  --radius-sm: 14px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  --shadow: 0 18px 60px rgba(0,0,0,.55);
+  --shadow-soft: 0 14px 44px rgba(0,0,0,.42);
+
+  --gold: #d7b26a;
+  --gold-2: #b9924f;
+  --green: #47c100;
+
+  --header-h: 86px;
+
+  /* ✅ padding lateral padrão (usado só em responsive) */
+  --gutter: 16px;
+}
+
+
+/* =========================
+   UTILITIES (desktop mantido)
+========================= */
+.container{
+  width:min(var(--container), 92vw);
+  margin:0 auto;
+}
+
+.section{
+  padding: 34px 0;
+  position:relative;
+}
+
+.section__head{
+  max-width: 740px;
+  margin:0 0 38px;
+}
+
+.section__kicker{
+  margin:0 0 10px;
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+
+  font-size:.82rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.68);
+}
+
+.section__title{
+  margin:0 0 12px;
+  font-size: clamp(2.05rem, 2.2vw, 2.65rem);
+  line-height:1.15;
+  letter-spacing:-0.02em;
+  color: var(--text);
+}
+
+.section__subtitle{
+  margin:0;
+  color: var(--muted);
+  font-size: 1.06rem;
+}
+
+.card{
+  background: linear-gradient(180deg, var(--bg-card), rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding: 14px 18px;
+  min-height: 48px;
+
+  border-radius: 999px;
+  border:1px solid transparent;
+
+  font-weight: 650;
+  letter-spacing:.01em;
+
+  transition: transform .18s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease, opacity .22s ease;
+  will-change: transform;
+  cursor:pointer;
+}
+
+.btn--primary{
+  background: radial-gradient(120% 120% at 10% 10%, rgba(215,178,106,.35) 0%, rgba(215,178,106,.12) 38%, rgba(215,178,106,.08) 70%) ,
+              linear-gradient(180deg, rgba(215,178,106,.95), rgba(185,146,79,.92));
+  color: #16110a;
+  box-shadow: 0 18px 50px rgba(215,178,106,.20);
+}
+
+.btn--primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 64px rgba(215,178,106,.28);
+}
+
+.btn--ghost{
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.88);
+}
+
+.btn--ghost:hover{
+  transform: translateY(-2px);
+  border-color: rgba(215,178,106,.45);
+  background: rgba(255,255,255,.06);
+}
+
+/* Acessibilidade: foco premium */
+:focus-visible{
+  outline: 2px solid rgba(215,178,106,.7);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Skip link */
+.skip-link{
+  position:absolute;
+  left:-999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip-link:focus{
+  left: 16px;
+  top: 14px;
+  width:auto;
+  height:auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.72);
+  border: 1px solid rgba(215,178,106,.35);
+  z-index: 999999;
+}
+
+
+/* ==================================================
+   RESPONSIVE — BASE (apenas ajustes que NÃO alteram desktop)
+   - objetivo: reduzir “colado nas bordas” e evitar overflow
+================================================== */
+
+/* ✅ melhora margem lateral no mobile/tablet sem afetar desktop (container já usa 92vw) */
+@media (max-width: 991.98px){
+  :root{ --gutter: 18px; }
+
+  .container{
+    width: min(var(--container), calc(100vw - (var(--gutter) * 2)));
+  }
+
+  /* textos mais confortáveis em telas menores */
+  .section__subtitle{ font-size: 1rem; }
+}
+
+
+/* ==================================================
+   MOBILE (max-width: 575.98px)
+   - botões mais "tocáveis"
+   - tipografia/spacing ajustados
+   - garantir sem scroll horizontal
+================================================== */
+@media (max-width: 575.98px){
+
+  :root{ --gutter: 16px; }
+
+  /* seções: menos altura pra não ficar “vazio” */
+  .section{ padding: 28px 0; }
+
+  /* cabeçalho de seção: reduz margem inferior */
+  .section__head{ margin: 0 0 26px; }
+
+  /* títulos: mantém identidade, só melhora leitura */
+  .section__title{
+    font-size: clamp(1.75rem, 6.2vw, 2.1rem);
+    line-height: 1.12;
+  }
+
+  .section__kicker{
+    font-size: .78rem;
+    letter-spacing: .16em;
+  }
+
+  .section__subtitle{
+    font-size: .98rem;
+  }
+
+  /* botões: área de toque + largura útil */
+  .btn{
+    min-height: 50px;
+    padding: 14px 16px;
+  }
+}
+
+/* ==================================================
+   FIX — HERO ocupar tela toda no mobile (sem mexer desktop)
+   - usa 100dvh (viewport real do celular)
+   - mantém conteúdo abaixo do header
+================================================== */
+@media (max-width: 575.98px){
+
+  /* ocupa a tela inteira (viewport real) */
+  .hero--fullscreen{
+    min-height: 100dvh;   /* ✅ melhor que 100vh no mobile */
+    height: 100dvh;
+  }
+
+  /* imagem preenche a área toda */
+  .hero__bg,
+  .hero__bgImg{
+    height: 100%;
+  }
+
+  /* conteúdo não fica atrás do header */
+  .hero__content--center{
+    padding-top: calc(var(--header-h) + 14px);
+    padding-bottom: 22px; /* ✅ respiro pro botão */
+  }
+}
+
+/* Tablet também fica full-screen (opcional, fica top) */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .hero--fullscreen{
+    min-height: 100dvh;
+    height: 100dvh;
+  }
+}
+
+/* ==================================================
+   TABLET (min-width: 576px) and (max-width: 991.98px)
+   - ajustes suaves sem mexer na identidade
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  .section{ padding: 32px 0; }
+
+  .section__head{ margin: 0 0 30px; }
+
+  .section__title{
+    font-size: clamp(1.95rem, 4.2vw, 2.35rem);
+  }
+}
+
+
+/* ==================================================
+   DESKTOP (min-width: 992px) and (max-width: 1199.98px)
+   - manter layout, só garantir que nada estoure
+================================================== */
+@media (min-width: 992px) and (max-width: 1199.98px){
+  /* aqui quase nada: desktop já está pronto */
+}
+
+
+/* ==================================================
+   EXTRA LARGE (min-width: 1200px)
+   - desktop premium como está (sem ajustes)
+================================================== */
+@media (min-width: 1200px){
+  /* sem mudanças */
+}
+
+/* =========================
+   HEADER / NAV (logo central) — DESKTOP (mantido)
+   RESPONSIVE:
+   - Mobile/Tablet: header mais baixo + nav compacta
+   - Evita scroll horizontal
+   - Mantém logo central (sem “botão”)
+========================= */
+.header{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  height: var(--header-h);
+  z-index: 9999;
+
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition: background .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.header.is-scrolled{
+  background: rgba(9, 10, 14, .42);
+  border-bottom-color: rgba(255,255,255,.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header__inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.nav{ width:100%; }
+
+.nav__list{
+  list-style:none;
+  padding:0;
+  margin:0 auto;
+  width: min(980px, 92vw);
+  display:grid;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr;
+  align-items:center;
+  gap: 2px;
+}
+
+.nav__item{
+  display:flex;
+  justify-content:center;
+}
+
+.nav__link{
+  position:relative;
+  padding: 10px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,.82);
+  font-weight: 620;
+  font-size: .98rem;
+  letter-spacing:.01em;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.nav__link:hover{
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  transform: translateY(-1px);
+}
+
+.nav__link::after{
+  content:"";
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 1px;
+  opacity:0;
+  background: linear-gradient(90deg, transparent, rgba(215,178,106,.75), transparent);
+  transition: opacity .22s ease;
+}
+.nav__link:hover::after{ opacity:1; }
+
+/* Brand central */
+.nav__item--brand{ justify-content:center; }
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  border:0;
+  background: transparent;
+  border-radius:0;
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.brand:hover{
+  transform: translateY(-1px);
+  opacity: .96;
+}
+
+.brand__name{
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: .86rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(215,178,106,.80));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand__logo{
+  height: 124px; /* desktop como está */
+  width: auto;
+  display:block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.45));
+  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+}
+
+.brand:hover .brand__logo{
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.55));
+}
+
+
+/* ==================================================
+   RESPONSIVE — HEADER/NAV
+   (mantém identidade e evita overflow)
+================================================== */
+
+/* TABLET (576px a 991.98px) */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  /* header um pouco menor */
+  :root{ --header-h: 76px; }
+
+  .nav__list{
+    width: min(860px, calc(100vw - (var(--gutter) * 2)));
+    gap: 6px;
+  }
+
+  .nav__link{
+    padding: 9px 10px;
+    font-size: .94rem;
+  }
+
+  /* logo proporcional (sem estourar altura do header) */
+  .brand__logo{
+    height: 92px;
+  }
+}
+
+
+/* MOBILE (até 575.98px)
+   - mantém os 4 links visíveis (sem menu hamburguer, como você pediu)
+   - compacta tipografia/padding
+   - garante que não "empurre" e gere scroll horizontal
+*/
+@media (max-width: 575.98px){
+
+  :root{ --header-h: 72px; }
+
+  .nav__list{
+    width: calc(100vw - (var(--gutter) * 2));
+    gap: 2px;
+  }
+
+  /* links mais compactos pra caber */
+  .nav__link{
+    padding: 8px 8px;
+    font-size: .88rem;
+    letter-spacing: 0;
+    border-radius: 999px;
+  }
+
+  /* reduz underline para não "vazar" */
+  .nav__link::after{
+    left: 10px;
+    right: 10px;
+    bottom: 5px;
+  }
+
+  /* logo não pode estourar o header */
+  .brand__logo{
+    height: 74px;
+    max-width: 120px;
+  }
+
+  /* evita qualquer item forçar largura */
+  .nav__item{ min-width: 0; }
+  .nav__link{ white-space: nowrap; }
+}
+
+/* =========================
+   HERO FULLSCREEN (DESKTOP mantido)
+========================= */
+.hero--fullscreen{
+  position:relative;
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:0;
+}
+
+/* imagem ocupa tudo */
+.hero__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.hero__bgImg{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+}
+
+/* overlay escuro 50% */
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.5);
+  z-index:1;
+}
+
+/* conteúdo centralizado */
+.hero__content--center{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width: 780px;
+  padding-top: var(--header-h); /* garante que não fique atrás da navbar */
+}
+
+/* headline */
+.hero__headline{
+  margin:0 0 26px;
+  font-size: clamp(2.6rem, 3.5vw, 3.6rem);
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero__headlineSub{
+  display:block;
+  margin-top: 10px;
+  color: rgba(215,178,106,.95);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+}
+
+/* botão hero */
+.btn--hero{
+  padding: 16px 28px;
+  font-size: 1.05rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+}
+
+
+/* ==================================================
+   RESPONSIVE — HERO
+   - mantém identidade (apenas escala/spacing)
+   - evita textos colados nas bordas
+================================================== */
+
+/* TABLET */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  .hero__content--center{
+    max-width: 680px;
+    padding-top: calc(var(--header-h) + 10px);
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .hero__headline{
+    font-size: clamp(2.2rem, 4.6vw, 3.0rem);
+    margin-bottom: 20px;
+  }
+
+  .hero__headlineSub{
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  }
+
+  .btn--hero{
+    padding: 15px 24px;
+    font-size: 1.02rem;
+    min-height: 50px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 575.98px){
+
+  /* evita "corte ruim" no topo em telas baixas */
+  .hero--fullscreen{
+    min-height: 92vh;
+  }
+
+  .hero__bgImg{
+    object-position: center;
+    transform: scale(1.06);
+  }
+
+  .hero__content--center{
+    max-width: 520px;
+    padding-top: calc(var(--header-h) + 12px);
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .hero__headline{
+    font-size: clamp(1.9rem, 7.2vw, 2.45rem);
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+
+  .hero__headlineSub{
+    font-size: clamp(1.02rem, 4.2vw, 1.22rem);
+    margin-top: 8px;
+  }
+
+  /* CTA grande e tocável */
+  .btn--hero{
+    width: 100%;
+    max-width: 420px;
+    padding: 16px 18px;
+    font-size: 1rem;
+    min-height: 52px;
+  }
+}
+
+
+/* =========================
+   SOBRE (DESKTOP mantido)
+========================= */
+.section--about{
+  background: linear-gradient(180deg, rgba(11,13,18,1) 0%, rgba(7,8,11,1) 100%);
+}
+
+.about{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 34px;
+  align-items:start;
+}
+
+.about__text p{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.78);
+}
+
+.about__highlights{
+  list-style:none;
+  padding:0;
+  margin: 18px 0 0;
+  display:grid;
+  gap: 10px;
+}
+
+.about__highlight{
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.80);
+}
+
+.about__cta{ margin-top: 18px; }
+
+.about__media{
+  position:relative;
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.about__img{
+  width:100%;
+  height:auto;
+  display:block;
+  transform: scale(1.02);
+}
+
+.about__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(520px 420px at 80% 15%, rgba(215,178,106,.14), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.36) 80%);
+}
+
+.about__badge{
+  position:absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index:2;
+
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  background: rgba(0,0,0,.46);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.about__badgeTitle{
+  margin:0 0 2px;
+  font-weight: 850;
+  color: rgba(255,255,255,.92);
+}
+.about__badgeText{
+  margin:0;
+  color: rgba(255,255,255,.66);
+  font-size:.92rem;
+}
+
+
+/* ==================================================
+   RESPONSIVE — SOBRE
+   - Tablet: reduz gap e melhora fluxo
+   - Mobile: 1 coluna (texto em cima, mídia embaixo)
+   - mantém imagens sem distorção
+================================================== */
+
+/* TABLET */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  .about{
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items:start;
+  }
+
+  /* garante respiro lateral (sem colar na borda) */
+  .about__text{
+    padding-right: 0;
+  }
+
+  .about__badge{
+    left: 14px;
+    bottom: 14px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 575.98px){
+
+  .about{
+    grid-template-columns: 1fr; /* ✅ 1 coluna */
+    gap: 18px;
+  }
+
+  /* texto com margem confortável */
+  .about__text{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .about__highlights{
+    gap: 10px;
+  }
+
+  .about__highlight{
+    padding: 12px 12px;
+    border-radius: 14px;
+  }
+
+  /* mídia não pode estourar e mantém corte bonito */
+  .about__media{
+    border-radius: 20px;
+  }
+
+  .about__img{
+    transform: scale(1.03);
+  }
+
+  .about__badge{
+    left: 12px;
+    bottom: 12px;
+    border-radius: 16px;
+    padding: 10px 12px;
+  }
+
+  .about__badgeText{
+    font-size: .9rem;
+  }
+
+  /* CTA confortável e tocável */
+  .about__cta .btn{
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+/* =========================
+   SERVIÇOS (DESKTOP mantido)
+========================= */
+.section--services{
+  background: linear-gradient(180deg, rgba(7,8,11,1) 0%, rgba(11,13,18,1) 100%);
+}
+
+.services{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.service{
+  padding: 22px 22px 20px;
+  position:relative;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.service:hover{
+  transform: translateY(-4px);
+  border-color: rgba(215,178,106,.25);
+  background: linear-gradient(180deg, var(--bg-card-2), rgba(255,255,255,.03));
+}
+
+.service__tag{
+  position:absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 10px;
+  border-radius: 999px;
+
+  font-size:.74rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight: 850;
+
+  background: rgba(215,178,106,.18);
+  border: 1px solid rgba(215,178,106,.28);
+  color: rgba(215,178,106,.95);
+}
+
+.service__title{
+  margin:0 0 10px;
+  font-size: 1.28rem;
+  letter-spacing:-0.01em;
+  color: rgba(255,255,255,.92);
+}
+
+.service__desc{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.72);
+}
+
+.service__bullets{
+  margin:0 0 16px;
+  padding-left: 18px;
+  color: rgba(255,255,255,.70);
+}
+
+.service__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight: 800;
+  color: rgba(215,178,106,.92);
+  letter-spacing:.01em;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.service__cta:hover{
+  transform: translateX(3px);
+  opacity:.95;
+}
+
+.service--featured{
+  border-color: rgba(215,178,106,.22);
+  background: linear-gradient(180deg, rgba(215,178,106,.10), rgba(255,255,255,.03));
+}
+
+/* Nota + CTA */
+.services__note{
+  margin-top: 18px;
+  padding: 18px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+.services__noteText{
+  margin:0;
+  color: rgba(255,255,255,.72);
+}
+
+
+/* ==================================================
+   RESPONSIVE — SERVIÇOS
+   - Tablet: 2 colunas
+   - Mobile: 1 coluna, cards com padding menor
+   - Nota: empilha e CTA ocupa largura útil
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .services{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .service{
+    padding: 20px 18px 18px;
+  }
+
+  .service__tag{
+    top: 14px;
+    right: 14px;
+  }
+
+  .services__note{
+    padding: 16px;
+  }
+}
+
+@media (max-width: 575.98px){
+  .services{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service{
+    padding: 18px 16px 16px;
+  }
+
+  .service__tag{
+    top: 12px;
+    right: 12px;
+    font-size: .72rem;
+  }
+
+  .service__bullets{
+    padding-left: 16px;
+  }
+
+  /* Nota vira coluna */
+  .services__note{
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    padding: 16px;
+  }
+
+  .services__note .btn{
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* =========================
+   PLANOS / CLUBE (DESKTOP mantido)
+========================= */
+.section--plans{
+  background: linear-gradient(180deg, rgba(7,8,11,1) 0%, rgba(11,13,18,1) 100%);
+}
+
+.section__head--center{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.plans{
+  margin-top: 28px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items:stretch;
+}
+
+.plan{
+  position:relative;
+  padding: 28px 20px 26px;
+  border-radius: 26px;
+
+  border: 2px solid rgba(215,178,106,.6);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(215,178,106,.06) 0%, rgba(0,0,0,.55) 60%);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+
+  text-align:center;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.plan:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 28px 80px rgba(0,0,0,.65);
+  border-color: rgba(215,178,106,.9);
+}
+
+.plan__badge{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform: translateX(-50%);
+
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.08em;
+
+  background: linear-gradient(180deg, #d7b26a, #b9924f);
+  color:#1a1408;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+.plan__title{
+  margin: 20px 0 10px;
+  font-size: 1.9rem;
+  letter-spacing:.03em;
+  color:#fff;
+}
+
+.plan__title span{
+  display:block;
+  color: var(--gold);
+  font-weight:800;
+}
+
+.plan__price{
+  margin: 10px 0 0;
+  font-size: 3.2rem;
+  font-weight:800;
+  color:#fff;
+}
+
+.plan__currency{
+  font-size: 1.2rem;
+  margin-right: 4px;
+  color: var(--gold);
+}
+
+.plan__cents{
+  font-size: 1.2rem;
+  color: rgba(255,255,255,.7);
+}
+
+.plan--featured{
+  border-color: var(--gold);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(215,178,106,.14) 0%, rgba(0,0,0,.55) 60%);
+}
+
+.plans__cta{
+  margin-top: 32px;
+  text-align:center;
+}
+
+
+/* ==================================================
+   RESPONSIVE — PLANOS
+   - Tablet: 2 colunas (o destaque ocupa coluna inteira)
+   - Mobile: 1 coluna, preços e paddings ajustados
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .plans{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* deixa o featured mais "premium" no centro */
+  .plan--featured{
+    grid-column: 1 / -1;
+  }
+
+  .plan{
+    padding: 26px 18px 22px;
+    border-radius: 24px;
+  }
+
+  .plan__title{
+    font-size: 1.7rem;
+  }
+
+  .plan__price{
+    font-size: 3.0rem;
+  }
+}
+
+@media (max-width: 575.98px){
+  .plans{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .plan{
+    padding: 24px 16px 20px;
+    border-radius: 22px;
+  }
+
+  .plan__badge{
+    top: -12px;
+    padding: 8px 12px;
+    font-size: .76rem;
+  }
+
+  .plan__title{
+    font-size: 1.55rem;
+    margin-top: 18px;
+  }
+
+  .plan__price{
+    font-size: 2.8rem;
+  }
+
+  .plans__cta .btn{
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+
+/* =========================
+   CURSOS (DESKTOP mantido)
+========================= */
+.section--courses{
+  position:relative;
+  min-height: 92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:0;
+}
+
+.courses__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.courses__bgImg{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position:center;
+}
+
+.courses__overlay{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 80% 50%, rgba(215,178,106,.18), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.85));
+  z-index:1;
+}
+
+.courses__content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width: 720px;
+}
+
+.courses__kicker{
+  margin:0;
+  font-size:1.2rem;
+  letter-spacing:.18em;
+  color:#fff;
+}
+
+.courses__kickerSub{
+  margin:0 0 18px;
+  letter-spacing:.22em;
+  color: var(--gold);
+  font-weight:600;
+}
+
+.courses__title{
+  margin:0 0 14px;
+  font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+  line-height:1.15;
+  color:#fff;
+  font-weight:800;
+}
+
+.courses__desc{
+  margin:0 0 14px;
+  color: rgba(255,255,255,.78);
+}
+
+.courses__highlight{
+  margin:0 0 20px;
+  color: var(--gold);
+  font-weight:600;
+  letter-spacing:.05em;
+}
+
+.btn--courses{
+  margin-bottom: 28px;
+  padding: 16px 26px;
+}
+
+.courses__features{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 34px;
+}
+
+.courses__feature{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color: rgba(255,255,255,.85);
+  font-size:.92rem;
+  min-width: 140px;
+}
+
+.courses__feature p{
+  margin-top: 8px;
+  line-height:1.3;
+}
+
+.courses__icon{
+  display:block;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  color: var(--gold);
+}
+
+.courses__iconImg{
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.courses__feature:hover .courses__iconImg{
+  transform: translateY(-2px) scale(1.05);
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+}
+
+
+/* ==================================================
+   RESPONSIVE — CURSOS
+   - Tablet: reduz largura e respiro
+   - Mobile: conteúdo com padding, CTA full e features em coluna
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .section--courses{
+    min-height: 80vh;
+  }
+
+  .courses__content{
+    max-width: 640px;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .courses__title{
+    font-size: clamp(2.0rem, 4.2vw, 2.5rem);
+  }
+
+  .btn--courses{
+    padding: 15px 22px;
+    min-height: 50px;
+  }
+
+  .courses__features{
+    gap: 24px;
+  }
+}
+
+@media (max-width: 575.98px){
+  .section--courses{
+    min-height: 78vh;
+  }
+
+  .courses__bgImg{
+    object-position: center;
+  }
+
+  .courses__content{
+    max-width: 520px;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .courses__kicker{
+    font-size: 1.05rem;
+  }
+
+  .courses__kickerSub{
+    margin-bottom: 14px;
+    letter-spacing: .20em;
+  }
+
+  .courses__title{
+    font-size: clamp(1.7rem, 6.4vw, 2.2rem);
+    line-height: 1.12;
+  }
+
+  .courses__desc{
+    font-size: .98rem;
+  }
+
+  .btn--courses{
+    width: 100%;
+    max-width: 420px;
+    padding: 16px 18px;
+    min-height: 52px;
+  }
+
+  /* features em coluna (sem estourar largura) */
+  .courses__features{
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .courses__feature{
+    min-width: 0;
+    width: 100%;
+  }
+
+  .courses__iconImg{
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* =========================
+   CONTATO (DESKTOP mantido)
+========================= */
+.section--contact{
+  background: linear-gradient(180deg, rgba(11,13,18,1) 0%, rgba(7,8,11,1) 100%);
+}
+
+.contact{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* CARD ESQUERDA */
+.contact__card{
+  padding: 22px;
+}
+
+.contact__title{
+  margin:0 0 14px;
+  font-size: 1.24rem;
+  color: rgba(255,255,255,.92);
+}
+
+.contact__list{
+  list-style:none;
+  padding:0;
+  margin:0 0 18px;
+  display:grid;
+  gap: 12px;
+}
+
+.contact__item{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap: 14px;
+
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+.contact__label{
+  color: rgba(255,255,255,.60);
+  font-size:.92rem;
+  font-weight: 700;
+}
+
+.contact__value{
+  color: rgba(255,255,255,.86);
+  font-weight: 750;
+  transition: color .18s ease, opacity .18s ease;
+}
+
+.contact__value:hover{
+  color: rgba(215,178,106,.92);
+  opacity: .95;
+}
+
+.contact__actions{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  margin: 0 0 12px;
+}
+
+.contact__trust{
+  margin:0;
+  color: rgba(255,255,255,.62);
+  font-size:.95rem;
+}
+
+/* CARD DIREITA — MAPA */
+.contact__map{
+  padding: 22px;
+  display:flex;
+  flex-direction:column;
+}
+
+.contact__mapWrapper{
+  margin-top: 12px;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+
+  flex: 1;
+  min-height: 360px;
+
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
+}
+
+.contact__mapWrapper iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+
+/* ==================================================
+   RESPONSIVE — CONTATO
+   - Tablet: reduz padding e melhora encaixe dos itens
+   - Mobile: 1 coluna, botões full, mapa com altura boa
+   - Evita overflow por texto longo (ex: endereço)
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+
+  .contact{
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .contact__card,
+  .contact__map{
+    padding: 20px;
+  }
+
+  /* itens com quebra segura */
+  .contact__item{
+    gap: 12px;
+  }
+
+  .contact__value{
+    text-align:right;
+  }
+
+  .contact__mapWrapper{
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 575.98px){
+
+  .contact{
+    grid-template-columns: 1fr; /* ✅ empilha */
+    gap: 14px;
+  }
+
+  .contact__card,
+  .contact__map{
+    padding: 18px;
+  }
+
+  /* evita “estouro” de textos longos (sem scroll horizontal) */
+  .contact__item{
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap: 6px;
+  }
+
+  .contact__label{
+    font-size: .9rem;
+  }
+
+  .contact__value{
+    width: 100%;
+    text-align:left;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* botões tocáveis e em coluna */
+  .contact__actions{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .contact__actions .btn{
+    width: 100%;
+    justify-content:center;
+  }
+
+  /* mapa com altura boa em mobile */
+  .contact__mapWrapper{
+    min-height: 320px;
+  }
+}
+
+
+/* =========================
+   FOOTER MINIMAL (DESKTOP mantido)
+========================= */
+.footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #07090f;
+}
+
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 18px 0;
+  gap: 12px;
+}
+
+.footer__copy{
+  margin:0;
+  font-size:.92rem;
+  color: rgba(255,255,255,.55);
+}
+
+.footer__dev{
+  margin:0;
+  font-size:.92rem;
+  color: rgba(255,255,255,.55);
+}
+
+.footer__dev a{
+  color: rgba(215,178,106,.92);
+  font-weight:600;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.footer__dev a:hover{
+  opacity:.9;
+  transform: translateY(-1px);
+}
+
+
+/* ==================================================
+   RESPONSIVE — FOOTER
+   - Tablet: mantém linha, só reduz espaços se precisar
+   - Mobile: empilha e centraliza, sem quebrar layout
+================================================== */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .footer__inner{
+    padding: 16px 0;
+  }
+}
+
+@media (max-width: 575.98px){
+  .footer__inner{
+    flex-direction: column;
+    align-items: center;
+    text-align:center;
+    padding: 16px 0;
+    gap: 8px;
+  }
+
+  .footer__copy,
+  .footer__dev{
+    font-size: .9rem;
+  }
+}
+
+/* =========================
+   WHATS FLOAT (conversão) — PREMIUM (SEM CÍRCULO VERDE)
+   - Apenas a logo (maior)
+   - Tooltip no hover/focus (desktop/tablet)
+   - Mobile: sem tooltip (não faz sentido no toque) + posição/tamanho ajustados
+========================= */
+.whats-float{
+  position: fixed;
+  right: 22px;
+  bottom: 74px;              /* desktop: acima do rodapé */
+  z-index: 999999;
+
+  width: 64px;
+  height: 64px;
+
+  display:grid;
+  place-items:center;
+
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  transition: transform .18s ease, filter .22s ease, opacity .22s ease;
+  cursor:pointer;
+
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.whats-float:hover{
+  transform: translateY(-2px);
+}
+
+.whats-float__img{
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  display:block;
+  pointer-events:none;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.55));
+  transition: transform .18s ease, filter .22s ease, opacity .22s ease;
+}
+
+.whats-float:hover .whats-float__img{
+  transform: scale(1.06);
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,.62));
+  opacity: .98;
+}
+
+/* =========================
+   TOOLTIP (desktop/tablet)
+========================= */
+.whats-float::after{
+  content:"Agendar no Whats";
+  position:absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  background: rgba(10,12,18,.72);
+  border: 1px solid rgba(215,178,106,.28);
+  color: rgba(255,255,255,.88);
+
+  font-weight: 750;
+  font-size: .92rem;
+  letter-spacing: .01em;
+  white-space: nowrap;
+
+  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+/* setinha do tooltip */
+.whats-float::before{
+  content:"";
+  position:absolute;
+  right: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid rgba(10,12,18,.72);
+
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events:none;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+
+.whats-float:hover::after,
+.whats-float:focus-visible::after{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+.whats-float:hover::before,
+.whats-float:focus-visible::before{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-2px);
+}
+
+
+/* ==================================================
+   RESPONSIVE — WHATS FLOAT
+   - Tablet: ligeiro ajuste de posição/tamanho
+   - Mobile: reduz tamanho e remove tooltip (evita bug/oclusão)
+================================================== */
+
+/* TABLET */
+@media (min-width: 576px) and (max-width: 991.98px){
+  .whats-float{
+    right: 18px;
+    bottom: 62px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .whats-float__img{
+    width: 50px;
+    height: 50px;
+  }
+
+  /* tooltip um pouco menor */
+  .whats-float::after{
+    font-size: .9rem;
+    padding: 9px 11px;
+    right: calc(100% + 10px);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 575.98px){
+  .whats-float{
+    right: 14px;
+    bottom: 18px;  /* ✅ mais baixo no mobile (não briga com conteúdo) */
+    width: 56px;
+    height: 56px;
+  }
+
+  .whats-float__img{
+    width: 50px;
+    height: 50px;
+  }
+
+  /* ✅ remove tooltip no touch (evita sobreposição e "hover preso") */
+  .whats-float::after,
+  .whats-float::before{
+    content:none !important;
+    display:none !important;
+  }
+}
+
+
+/* =========================
+   ÂNCORAS (header fixo) — OK
+   - mantém desktop igual
+   - acompanha o header menor no mobile/tablet (via --header-h)
+========================= */
+section[id]{ scroll-margin-top: calc(var(--header-h) - 6px); }

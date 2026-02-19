@@ -1,0 +1,538 @@
+<!-- ==================================================
+  PÁGINA: LANDING - BARBEARIA (Filipe Assis Barber)
+  ARQUIVO: index.html
+  VERSÃO: 1.0 (HTML base - sem CSS/JS)
+  OBJETIVO: Landing page com foco em conversão (agendamento via WhatsApp)
+  SEÇÕES: HOME / SOBRE / SERVIÇOS / CONTATO
+================================================== -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="index, follow" />
+
+  <title>Filipe Assis Barber | Barbearia Premium • Corte, Barba e Estilo</title>
+  <meta name="description" content="Barbearia premium com foco em estilo e experiência. Corte, barba e acabamento impecável. Agende pelo WhatsApp em 1 minuto na Filipe Assis Barber." />
+  <link rel="canonical" href="https://SEU-DOMINIO-AQUI.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Filipe Assis Barber | Barbearia Premium" />
+  <meta property="og:description" content="Corte, barba e experiência premium. Agende pelo WhatsApp em 1 minuto." />
+  <meta property="og:url" content="https://SEU-DOMINIO-AQUI.com/" />
+  <meta property="og:image" content="https://SEU-DOMINIO-AQUI.com/img/og-cover.jpg" />
+
+  <!-- Favicon (ajuste depois) -->
+  <link rel="icon" href="./img/favicon.png" />
+
+  <!-- CSS (vamos criar depois) -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body class="page page--barber" id="top">
+  <!-- Skip link (acessibilidade) -->
+  <a class="skip-link" href="#home">Pular para o conteúdo</a>
+
+  <!-- ==================================================
+    HEADER / NAV
+    - Nome/Logo centralizado
+    - Links: HOME - SOBRE - LOGO/NOME - SERVIÇOS - CONTATO
+================================================== -->
+  <header class="header" data-header>
+  <div class="header__inner container">
+    <nav class="nav" aria-label="Navegação principal">
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="#home" data-navlink>Home</a></li>
+        <li class="nav__item"><a class="nav__link" href="#sobre" data-navlink>Sobre</a></li>
+
+        <!-- LOGO CENTRAL (SEM BOTÃO VISUAL) -->
+        <li class="nav__item nav__item--brand" aria-label="Filipe Assis Barber">
+          <a href="#home" class="brand" data-navlink aria-label="Voltar ao topo">
+            <img
+              src="./img/logo.png"
+              alt="Filipe Assis Barber"
+              class="brand__logo"
+              width="160"
+              height="40"
+              loading="eager"
+              decoding="async"
+            />
+          </a>
+        </li>
+
+        <li class="nav__item"><a class="nav__link" href="#servicos" data-navlink>Serviços</a></li>
+        <li class="nav__item"><a class="nav__link" href="#contato" data-navlink>Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <main>
+
+<!-- ==================================================
+  HERO FULLSCREEN — CONVERSÃO
+================================================== -->
+<section class="hero hero--fullscreen" id="home" aria-label="Home">
+
+  <!-- imagem de fundo -->
+  <div class="hero__bg">
+    <img
+      src="./img/fundo-header.webp"
+      alt="Ambiente premium da barbearia"
+      class="hero__bgImg"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <!-- overlay escuro -->
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <!-- conteúdo -->
+  <div class="hero__content hero__content--center container">
+
+    <h1 class="hero__headline">
+      Cabelo, Barba e Estilo.
+      <span class="hero__headlineSub">Tudo em um só lugar.</span>
+    </h1>
+
+    <a
+      href="https://wa.me/48988263159?text=Olá! Quero agendar um horário."
+      class="btn btn--primary btn--hero"
+      target="_blank"
+      rel="noopener"
+    >
+      Agende seu Horário Agora
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+      SOBRE — Autoridade + confiança
+================================================== -->
+    <section class="section section--about" id="sobre" aria-label="Sobre">
+      <div class="container">
+        <header class="section__head">
+          <p class="section__kicker">sobre a barbearia</p>
+          <h2 class="section__title">Mais do que um corte: uma experiência.</h2>
+          <p class="section__subtitle">
+            Aqui você não “só corta o cabelo”. Você sai com postura, presença e um visual alinhado com quem você é.
+          </p>
+        </header>
+
+        <div class="about">
+          <div class="about__text">
+            <p>
+              A <strong>Filipe Assis Barber</strong> nasceu para quem valoriza <strong>qualidade, conforto e resultado</strong>.
+              Do atendimento ao acabamento final, cada detalhe foi pensado para você sair daqui pronto — sem pressa e sem improviso.
+            </p>
+
+            <p>
+              Trabalhamos com técnica, higiene rigorosa e produtos selecionados. Seja para manter o corte em dia,
+              ajustar a barba ou dar aquela repaginada completa, o objetivo é sempre o mesmo:
+              <strong>te deixar com aparência impecável e confiança lá em cima.</strong>
+            </p>
+
+            <ul class="about__highlights" aria-label="Diferenciais">
+              <li class="about__highlight"><strong>Atendimento por horário</strong> (sem fila)</li>
+              <li class="about__highlight"><strong>Acabamento premium</strong> em todos os serviços</li>
+              <li class="about__highlight"><strong>Ambiente confortável</strong> e bem localizado</li>
+              <li class="about__highlight"><strong>Higiene e cuidado</strong> em cada etapa</li>
+            </ul>
+
+            <div class="about__cta">
+              <a class="btn btn--primary" href="https://wa.me/48988263159?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Filipe%20Assis%20Barber." target="_blank" rel="noopener">
+                Quero agendar um horário
+              </a>
+            </div>
+          </div>
+
+          <aside class="about__media" aria-label="Imagem e prova social">
+            <img
+              class="about__img"
+              src="./img/card-sobre.webp"
+              alt="Barbeiro finalizando o acabamento com precisão"
+              width="1000"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <div class="about__badge" aria-label="Prova social">
+              <p class="about__badgeTitle">Atendimento de alto padrão</p>
+              <p class="about__badgeText">técnica + detalhe + experiência</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+<!-- ==================================================
+      SERVIÇOS — Oferta clara + CTA
+================================================== -->
+    <section class="section section--services" id="servicos" aria-label="Serviços">
+      <div class="container">
+        <header class="section__head">
+          <p class="section__kicker">serviços</p>
+          <h2 class="section__title">Escolha o serviço e saia pronto.</h2>
+          <p class="section__subtitle">
+            Opções objetivas, resultado consistente e acabamento premium. Se estiver em dúvida, chama no Whats.
+          </p>
+        </header>
+
+        <div class="services" role="list">
+          <article class="card service" role="listitem">
+            <h3 class="service__title">Corte premium</h3>
+            <p class="service__desc">
+              Consulta rápida + corte alinhado ao seu estilo. Finalização caprichada e orientação pra manter.
+            </p>
+            <ul class="service__bullets">
+              <li>degradê / social / clássico / moderno</li>
+              <li>acabamento na navalha</li>
+              <li>finalização com produto</li>
+            </ul>
+            <a class="service__cta" href="https://wa.me/48988263159?text=Ol%C3%A1!%20Quero%20agendar%20Corte%20Premium%20na%20Filipe%20Assis%20Barber." target="_blank" rel="noopener">
+              Agendar corte →
+            </a>
+          </article>
+
+          <article class="card service" role="listitem">
+            <h3 class="service__title">Barba completa</h3>
+            <p class="service__desc">
+              Desenho e alinhamento com precisão. Toalha quente e cuidado pra deixar a barba no padrão.
+            </p>
+            <ul class="service__bullets">
+              <li>modelagem + alinhamento</li>
+              <li>navalha com segurança</li>
+              <li>finalização hidratante</li>
+            </ul>
+            <a class="service__cta" href="https://wa.me/48988263159?text=Ol%C3%A1!%20Quero%20agendar%20Barba%20Completa%20na%20Filipe%20Assis%20Barber." target="_blank" rel="noopener">
+              Agendar barba →
+            </a>
+          </article>
+
+          <article class="card service service--featured" role="listitem" aria-label="Combo mais pedido">
+            <div class="service__tag">mais pedido</div>
+            <h3 class="service__title">Combo: corte + barba</h3>
+            <p class="service__desc">
+              O pacote completo pra sair impecável. Ideal pra compromissos, trabalho e eventos.
+            </p>
+            <ul class="service__bullets">
+              <li>corte sob medida</li>
+              <li>barba desenhada</li>
+              <li>acabamento premium</li>
+            </ul>
+            <a class="service__cta" href="https://wa.me/48988263159?text=Ol%C3%A1!%20Quero%20agendar%20o%20Combo%20Corte%20%2B%20Barba%20na%20Filipe%20Assis%20Barber." target="_blank" rel="noopener">
+              Agendar combo →
+            </a>
+          </article>
+        </div>
+
+        <div class="services__note">
+          <p class="services__noteText">
+            <strong>Dica:</strong> horários mais disputados são no fim do dia e sábado. Garanta seu horário com antecedência.
+          </p>
+          <a class="btn btn--primary" href="https://wa.me/48988263159?text=Ol%C3%A1!%20Quero%20ver%20os%20hor%C3%A1rios%20dispon%C3%ADveis%20na%20Filipe%20Assis%20Barber." target="_blank" rel="noopener">
+            Ver horários no WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+<!-- ==================================================
+  SEÇÃO: PLANOS / CLUBE
+================================================== -->
+<section class="section section--plans" id="planos" aria-label="Planos mensais">
+
+  <div class="container">
+
+    <header class="section__head section__head--center">
+      <p class="section__kicker">clube da barbearia</p>
+      <h2 class="section__title">Planos Mensais</h2>
+      <p class="section__subtitle">
+        Escolha um dos pacotes mensais e tenha prioridade no agendamento.
+      </p>
+    </header>
+
+    <div class="plans">
+
+      <!-- PLANO 1 -->
+      <article class="plan">
+        <div class="plan__badge">Plano Cabelo</div>
+
+        <h3 class="plan__title">
+          CORTE <span>CABELO</span>
+        </h3>
+
+        <p class="plan__price">
+          <span class="plan__currency">R$</span>
+          94
+          <span class="plan__cents">,00</span>
+        </p>
+      </article>
+
+      <!-- PLANO 2 -->
+      <article class="plan">
+        <div class="plan__badge">Plano Barba</div>
+
+        <h3 class="plan__title">
+          CORTE <span>BARBA</span>
+        </h3>
+
+        <p class="plan__price">
+          <span class="plan__currency">R$</span>
+          112
+          <span class="plan__cents">,80</span>
+        </p>
+      </article>
+
+      <!-- PLANO 3 -->
+      <article class="plan plan--featured">
+        <div class="plan__badge">Plano Completo</div>
+
+        <h3 class="plan__title">
+          CABELO <span>& BARBA</span>
+        </h3>
+
+        <p class="plan__price">
+          <span class="plan__currency">R$</span>
+          169
+          <span class="plan__cents">,20</span>
+        </p>
+      </article>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="plans__cta">
+      <a href="#contato" class="btn btn--primary">
+        Saiba Mais
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================
+  SEÇÃO: CURSOS
+================================================== -->
+<section class="section section--courses" id="cursos" aria-label="Cursos da barbearia">
+
+  <!-- background -->
+  <div class="courses__bg">
+    <img
+      src="./img/fundo-curso.webp"
+      alt="Ambiente da barbearia"
+      class="courses__bgImg"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <!-- overlay -->
+  <div class="courses__overlay" aria-hidden="true"></div>
+
+  <div class="container courses__content">
+
+    <!-- logo/título -->
+    <p class="courses__kicker">FILIPE ASSIS</p>
+    <p class="courses__kickerSub">CURSOS</p>
+
+    <!-- headline -->
+    <h2 class="courses__title">
+      Aprenda com quem vive a barbearia todos os dias
+    </h2>
+
+    <!-- descrição -->
+    <p class="courses__desc">
+      Cursos iniciantes e aperfeiçoamento da barbearia.
+      Formação prática, moderna e voltada para o sucesso no mercado.
+    </p>
+
+    <p class="courses__highlight">
+      Garanta sua vaga e aprenda com quem é referência
+    </p>
+
+    <!-- CTA -->
+    <a href="#contato" class="btn btn--primary btn--courses">
+      Quero me inscrever agora
+    </a>
+
+    <!-- benefícios -->
+    <div class="courses__features">
+
+    <div class="courses__feature">
+        <img class="courses__iconImg" width="94" height="94" src="https://img.icons8.com/3d-fluency/94/guarantee.png" alt="guarantee"/>
+        <p>Método Exclusivo</p>
+    </div>
+
+    <div class="courses__feature">
+        <img class="courses__iconImg" width="94" height="94" src="https://img.icons8.com/3d-fluency/94/popular-man.png" alt="popular-man"/>
+        <p>Profissionais Qualificados</p>
+    </div>
+
+    <div class="courses__feature">
+        <img class="courses__iconImg" width="94" height="94" src="https://img.icons8.com/3d-fluency/94/security-checked.png" alt="security-checked"/>
+        <p>Segurança Garantida</p>
+    </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================
+      CONTATO — Conversão + info objetiva
+================================================== -->
+    <section class="section section--contact" id="contato" aria-label="Contato">
+  <div class="container">
+    <header class="section__head">
+      <p class="section__kicker">contato</p>
+      <h2 class="section__title">Agende rápido. Chegue no horário. Saia pronto.</h2>
+      <p class="section__subtitle">
+        Clique no botão e fale direto no WhatsApp. Se preferir, veja nossa localização abaixo.
+      </p>
+    </header>
+
+    <div class="contact">
+
+      <!-- CARD ESQUERDA -->
+      <div class="contact__card card">
+        <h3 class="contact__title">Fale com a barbearia</h3>
+
+        <ul class="contact__list">
+
+          <li class="contact__item">
+            <span class="contact__label">WhatsApp</span>
+            <a class="contact__value" href="https://wa.me/5548988263159" target="_blank" rel="noopener">
+              (48) 98826-3159
+            </a>
+          </li>
+
+          <!-- INSTAGRAM -->
+          <li class="contact__item">
+            <span class="contact__label">Instagram</span>
+            <a class="contact__value" href="https://instagram.com/assisfilipee" target="_blank" rel="noopener">
+              @assisfilipee
+            </a>
+          </li>
+
+          <li class="contact__item">
+            <span class="contact__label">Endereço</span>
+            <span class="contact__value">Rua Exemplo, 123 • Centro</span>
+          </li>
+
+          <li class="contact__item">
+            <span class="contact__label">Horários</span>
+            <span class="contact__value">Seg–Sex: 09h–19h • Sáb: 09h–16h</span>
+          </li>
+
+        </ul>
+
+        <div class="contact__actions">
+          <a class="btn btn--primary" href="https://wa.me/48988263159?text=Olá! Quero agendar um horário." target="_blank" rel="noopener">
+            Agendar pelo WhatsApp
+          </a>
+
+          <a class="btn btn--ghost" href="#servicos">
+            Escolher serviço
+          </a>
+        </div>
+
+        <p class="contact__trust">
+          Atendimento com hora marcada • Confirmação no WhatsApp • Sem fila
+        </p>
+      </div>
+
+
+      <!-- CARD DIREITA — MAPA -->
+      <div class="contact__map card">
+        <h3 class="contact__title">Onde estamos</h3>
+
+        <div class="contact__mapWrapper">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14135.897545135393!2d-48.69894394984323!3d-27.656264163167695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95273503494832ed%3A0x36285d0726306c94!2sBela%20Vista%2C%20Palho%C3%A7a%20-%20SC%2C%2088132-695!5e0!3m2!1spt-PT!2sbr!4v1771464446019!5m2!1spt-PT!2sbr" width="600" height="450"
+          style="border:0;"
+          allowfullscreen=""
+          referrerpolicy="no-referrer-when-downgrade"
+          loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  </main>
+
+<!-- ==================================================
+    FOOTER — SEO local básico + credibilidade
+================================================== -->
+  <footer class="footer">
+  <div class="container footer__inner">
+
+    <p class="footer__copy">
+      © 2026 Filipe Assis Barber. Todos os direitos reservados
+    </p>
+
+    <p class="footer__dev">
+      Desenvolvido por 
+      <a href="https://filipeassis.dev" target="_blank" rel="noopener">
+        Filipe Assis
+      </a>
+    </p>
+
+  </div>
+</footer>
+
+  <!-- ==================================================
+    WHATSAPP FLOAT — CTA fixo (conversão)
+================================================== -->
+  <a
+  class="whats-float"
+  href="https://wa.me/48988263159?text=Olá! Quero agendar um horário na Filipe Assis Barber."
+  target="_blank"
+  rel="noopener"
+  aria-label="Agendar no WhatsApp"
+  title="Agendar no WhatsApp"
+>
+  <img width="48" height="48" src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"
+    alt=""
+    class="whats-float__img"
+    width="28"
+    height="28"
+    loading="lazy"
+    decoding="async"
+  />
+</a>
+
+
+  <!-- JS (vamos criar depois) -->
+  <script src="./script.js" defer></script>
+
+  <!-- Structured Data (SEO básico) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Barbershop",
+    "name": "Filipe Assis Barber",
+    "description": "Barbearia premium com foco em estilo e experiência. Corte, barba e acabamento impecável.",
+    "telephone": "+55 48 98826-3159",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Exemplo, 123",
+      "addressLocality": "Palhoça",
+      "addressRegion": "SC",
+      "addressCountry": "BR"
+    },
+    "openingHours": "Mo-Fr 09:00-19:00, Sa 09:00-16:00",
+    "url": "https://SEU-DOMINIO-AQUI.com/"
+  }
+  </script>
+</body>
+</html>
